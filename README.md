@@ -1,5 +1,9 @@
 # Podemosaprender
 
+[![pipeline status](https://gitlab.com/idcmardelplata/podemos_aprender/badges/master/pipeline.svg)](https://gitlab.com/idcmardelplata/podemos_aprender/-/commits/master)
+
+[![coverage report](https://gitlab.com/idcmardelplata/podemos_aprender/badges/master/coverage.svg)](https://gitlab.com/idcmardelplata/podemos_aprender/-/commits/master)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
