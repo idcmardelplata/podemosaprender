@@ -10,7 +10,17 @@ defmodule Podemosaprender.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
+      deps: deps(),
+      # docs
+      name: "PodemosAprender Social Network",
+      source_url: "https://gitlab.com/idcmardelplata/podemos_aprender"
     ]
   end
 
@@ -46,7 +56,13 @@ defmodule Podemosaprender.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:wallaby, "~> 0.26.0", runtime: false, only: :test},
+      {:ex_machina, "~> 2.4", only: :test},
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:sobelow, "~> 0.8", only: :dev},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
     ]
   end
 
@@ -61,7 +77,33 @@ defmodule Podemosaprender.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "assets.compile": &compile_assets/1,
+      "test.integration": &integration_test/1,
+      "test.cover": &cover_test/1,
+      "test.cover.report": &cover_report_test/1,
+      "linter.check": ["format --check-formatted", "credo"]
     ]
+  end
+
+  defp compile_assets(_) do
+    Mix.shell().cmd("cd assets && ./node_modules/.bin/webpack --mode development",
+      quiet: true
+    )
+  end
+
+  defp integration_test(_) do
+    Mix.env(:test)
+    Mix.shell().cmd("mix test test/podemosaprender_web/features/*")
+  end
+
+  defp cover_test(_) do
+    Mix.env(:test)
+    Mix.shell().cmd("mix coveralls")
+  end
+
+  defp cover_report_test(_) do
+    Mix.env(:test)
+    Mix.shell().cmd("mix coveralls.html")
   end
 end

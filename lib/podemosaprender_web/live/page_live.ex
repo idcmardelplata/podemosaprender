@@ -1,4 +1,7 @@
 defmodule PodemosaprenderWeb.PageLive do
+  @moduledoc """
+  Basic index page for the project
+  """
   use PodemosaprenderWeb, :live_view
 
   @impl true
