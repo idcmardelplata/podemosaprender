@@ -16,7 +16,16 @@ config :podemosaprender, Podemosaprender.Repo,
 # you can enable the server option below.
 config :podemosaprender, PodemosaprenderWeb.Endpoint,
   http: [port: 4002],
-  server: false
+  server: true
+
+config :podemosaprender, PodemosaprenderWeb.Endpoint, server: true
+
+config :podemosaprender, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :wallaby,
+  driver: Wallaby.Chrome
+
+config :wallaby, otp_app: :podemosaprender

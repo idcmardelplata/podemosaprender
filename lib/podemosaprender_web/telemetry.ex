@@ -1,4 +1,7 @@
 defmodule PodemosaprenderWeb.Telemetry do
+  @moduledoc """
+  Telemetry config
+  """
   use Supervisor
   import Telemetry.Metrics
 
