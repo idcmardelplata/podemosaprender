@@ -1,17 +1,21 @@
-# This stage will fail if formatting or credo issues are present
-lint:
-  stage: lint
+doc:
+  stage: doc
   image: elixir:1.10.4-alpine
-
-  # use cache
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
       - _build
       - deps
+      - doc
+
+  artifacts:
+    paths:
+      - doc
+
   script:
     - mix local.hex --force
     - mix local.rebar --force
-    - mix linter.check
+    - mix docs
+
   only:
     - merge_request

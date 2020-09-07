@@ -1,9 +1,11 @@
-# This stage will fail if formatting or credo issues are present
-lint:
-  stage: lint
+
+# this stage will fail if any tests fail or if test coverage is
+# below the coverage specified in /coveralls.json
+
+test:
+  stage: security
   image: elixir:1.10.4-alpine
 
-  # use cache
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
@@ -12,6 +14,4 @@ lint:
   script:
     - mix local.hex --force
     - mix local.rebar --force
-    - mix linter.check
-  only:
-    - merge_request
+    - mix sobelow -i Config.HTTPS
