@@ -1,0 +1,19 @@
+{
+  "skip_files": [
+    "test",
+    "lib/podemosaprender.ex",
+    "lib/podemosaprender_web.ex",
+    "lib/podemosaprender/application.ex",
+    "lib/podemosaprender/repo.ex",
+    "lib/podemosaprender_web/endpoint.ex",
+    "lib/podemosaprender_web/gettext.ex",
+    "lib/podemosaprender_web/router.ex",
+    "lib/podemosaprender_web/channels/user_socket.ex",
+    "lib/podemosaprender_web/views/error_helpers.ex",
+    "lib/podemosaprender_web/live/page_live.ex"
+  ],
+
+  "coverage_options": {
+    "minimum_coverage": 90
+  }
+}

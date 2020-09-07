@@ -1,6 +1,7 @@
 defmodule PodemosAprenderWeb.EnterTheSiteShowTheIndexPage do
   use PodemosaprenderWeb.FeatureCase, async: true
 
+  @tag :skip
   test "Users can visit the homepage", %{session: session} do
     session
     |> visit("/")
