@@ -22,3 +22,5 @@ js_linter:
     - npm run lint
   only:
     - merge_request
+    - develop
+    - master

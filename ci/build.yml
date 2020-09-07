@@ -16,3 +16,5 @@ compile:
     - mix compile --warnings-as-errors
   only:
     - merge_request
+    - develop
+    - master
