@@ -1,0 +1,9 @@
+#CI Principal de gitlab
+stages:
+  - build
+  - test
+
+include:
+  - local: "/ci/build.yml"
+  - local: "/ci/test.yml"
+  - local: "/ci/lint.yml"
