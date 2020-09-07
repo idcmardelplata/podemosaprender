@@ -15,3 +15,5 @@ lint:
     - mix linter.check
   only:
     - merge_request
+    - develop
+    - master

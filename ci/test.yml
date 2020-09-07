@@ -54,3 +54,5 @@ integration_test:
 
   only:
     - merge_request
+    - develop
+    - master

@@ -19,3 +19,5 @@ doc:
 
   only:
     - merge_request
+    - develop
+    - master
