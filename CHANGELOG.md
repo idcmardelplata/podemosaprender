@@ -16,8 +16,9 @@ Todos los cambios notables en este proyecto estaran documentados en este archivo
 - Agregado el alias a mix test.cover.report para que corra el code coverage y me genere un reporte en html
 - Agregado ex_doc para generar documentacion sobre los modulos y funciones del sistema.
 
-## [0.0.1] - 2020-09-05
+## [0.0.1] - 2020-09-07
 ### Added
+- Mejorado el CI para que compile, ejecute el linter tanto de elixir como de js, corra los test y genere la documentacion.
 
 ### Changed
 
