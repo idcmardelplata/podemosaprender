@@ -32,6 +32,6 @@ config :podemosaprender, :sql_sandbox, true
 config :logger, level: :warn
 
 config :wallaby,
-  driver: Wallaby.Selenium
+  driver: Wallaby.Chrome
 
 config :wallaby, otp_app: :podemosaprender
