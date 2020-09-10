@@ -1,4 +1,7 @@
 defmodule Podemosaprender.Users.User do
+  @moduledoc """
+   User schema file
+  """
   use Ecto.Schema
   use Pow.Ecto.Schema
 
