@@ -1,8 +1,8 @@
 name: Elixir Merge to develop
 
 on:
-  merge_request:
-    branches:
+  pull_request:
+    branches: 
       - develop
       - master
 
