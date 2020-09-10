@@ -92,11 +92,11 @@ jobs:
       # Run the tests
       - name: Run Unit Tests
         run: |
-          mix test
+          mix test | grep "0 failures"
           
       - name: Run Feature Test
         if: success()
-        run: mix test.integration
+        run: mix test.integration | grep "0 failures"
       
       - name: cancelling pipeline if test fail
         uses: andymckay/cancel-action@0.2
