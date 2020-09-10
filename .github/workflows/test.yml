@@ -37,6 +37,12 @@ jobs:
           sudo chown root:root /usr/bin/chromedriver
           sudo chmod +x /usr/bin/chromedriver
 
+      - name: Install google-chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get --only-upgrade install google-chrome-stable
+          google-chrome --version
+
       # Cache NPM packages
       - name: Retrieve NPM Packages Cache
         uses: actions/cache@v1
