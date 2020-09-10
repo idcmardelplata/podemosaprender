@@ -3,9 +3,7 @@ name: Elixir Linter and Test
 on:
   push:
     branches:
-      - '*' 
-      - '!master'
-      - '!develop'
+      - 'feature/**' 
 
 jobs:
   linter-and-unit-test:
