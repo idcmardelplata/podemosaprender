@@ -95,11 +95,9 @@ jobs:
           mix test
           
       - name: Run Feature Test
-        if: ${{ success() }}
+        if: success()
         run: mix test.integration
       
-      - name: Stop pipeline when test fail
-        if: ${{ failure() }}
-        run:  |
-          false
-        
+      - name: cancelling pipeline if test fail
+        uses: andymckay/cancel-action@0.2
+        if: failure()
