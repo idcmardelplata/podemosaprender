@@ -1,4 +1,4 @@
-name: Elixir Merge to develop
+name: Merge to develop
 
 on:
   pull_request:
