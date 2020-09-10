@@ -45,5 +45,7 @@ jobs:
      - run: mix local.hex --force
      - run: mix deps.get
      - run: npm install --prefix assets
-     - run: npm run deploy --prefix assets
-     - run: mix test
+     #- run: npm run deploy --prefix assets
+     - run: mix linter.check
+     - run: mix test.cover
+     - run: mix test.integration
