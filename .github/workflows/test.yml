@@ -102,3 +102,7 @@ jobs:
       - name: cancelling pipeline if test fail
         uses: andymckay/cancel-action@0.2
         if: failure()
+      
+        # Sobelow ignore HTTPS for development purposes.
+      - name: basic security analysis
+        run: mix sobelow -i Config.HTTPS
