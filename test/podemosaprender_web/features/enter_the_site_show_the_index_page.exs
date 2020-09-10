@@ -6,6 +6,4 @@ defmodule PodemosAprenderWeb.EnterTheSiteShowTheIndexPage do
     |> visit("/")
     |> assert_has(Query.css("h1", text: "Registrarme"))
   end
-
-
 end
