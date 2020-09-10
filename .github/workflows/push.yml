@@ -1,4 +1,4 @@
-name: Elixir Linter and Test
+name: Linter and Test for local branches
 
 on:
   push:
