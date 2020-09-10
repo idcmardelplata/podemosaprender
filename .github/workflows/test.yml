@@ -90,8 +90,16 @@ jobs:
         run: MIX_ENV=test mix deps.compile
 
       # Run the tests
-      - name: Run Tests
+      - name: Run Unit Tests
         run: |
           mix test
-          mix test.integration
+          
+      - name: Run Feature Test
+        if: ${{ success() }}
+        run: mix test.integration
+      
+      - name: Stop pipeline when test fail
+        if: ${{ failure() }}
+        run:  |
+          false
         
