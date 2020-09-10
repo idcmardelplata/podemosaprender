@@ -1,13 +1,14 @@
-name: Elixir Merge to develop
+name: Elixir Linter and Test
 
 on:
   push:
-    pull_request:
-      branches:
-        - develop
+    branches:
+      - '*' 
+      - '!master'
+      - '!develop'
 
 jobs:
-  test:
+  linter-and-unit-test:
     runs-on: ubuntu-latest
     
     services:
@@ -27,35 +28,6 @@ jobs:
         with:
           otp-version: 22.2.6
           elixir-version: 1.10.3
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Install chromedriver
-        run: |
-          wget https://chromedriver.storage.googleapis.com/84.0.4147.30/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/bin/chromedriver
-          sudo chown root:root /usr/bin/chromedriver
-          sudo chmod +x /usr/bin/chromedriver
-
-      - name: Install google-chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get --only-upgrade install google-chrome-stable
-          google-chrome --version
-
-      # Cache NPM packages
-      - name: Retrieve NPM Packages Cache
-        uses: actions/cache@v1
-        id: npm-cache
-        with:
-          path: assets/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles(format('{0}{1}', github.workspace, '/assets/package-lock.json')) }}
-
-      # Install NPM Packages only if cache was not hit
-      - name: Install NPM Packages
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm install --prefix assets
 
       # Cache Mix Dependencies based on mix.lock
       - name: Retrieve Mix Dependencies Cache
@@ -73,10 +45,6 @@ jobs:
           mix local.hex --force
           mix deps.get
 
-      # Compile and deploy assets to priv
-      - name: Deploy assets
-        run: npm run deploy --prefix ./assets
-
       # Cache the _build folder
       - name: Retrieve Build Cache
         uses: actions/cache@v1
@@ -90,15 +58,14 @@ jobs:
         if: steps.build-cache.outputs.cache-hit != 'true'
         run: MIX_ENV=test mix deps.compile
 
+      - name: check the linter and do a static code analysis
+        run: mix linter.check
+
       # Run the tests
       - name: Run Unit Tests
         run: |
           mix test | grep "0 failures"
           
-      - name: Run Feature Test
-        if: success()
-        run: mix test.integration | grep "0 failures"
-      
       - name: cancelling pipeline if test fail
         uses: andymckay/cancel-action@0.2
         if: failure()
