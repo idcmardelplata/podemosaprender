@@ -62,7 +62,8 @@ defmodule Podemosaprender.MixProject do
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:sobelow, "~> 0.8", only: :dev},
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:ex_check, "~> 0.12.0", only: :dev, runtime: false}
     ]
   end
 
